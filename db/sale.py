@@ -1,5 +1,6 @@
 from db.base import Base
-from sqlalchemy import Column, Integer, String, Float, Date
+from sqlalchemy import Column, Integer, String, Float, Date, Boolean
+
 
 class Sale(Base):
     __tablename__ = "sales"
@@ -17,5 +18,6 @@ class Sale(Base):
     rrp = Column(Float)
     supplier = Column(String)
     date_of_sale = Column(Date)
+    validation_passed = Column(Boolean, default=False)
 
 

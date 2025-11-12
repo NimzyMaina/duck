@@ -56,3 +56,38 @@ For example, I would imagine that data from QuickMark & Carrefour have different
 The data can then be Augmented into a uniform schema at the **Silver** layer before finally "massaging" it into the **Gold** layer for business analytics.
 
 ![Medallion Architecture](https://www.databricks.com/sites/default/files/inline-images/building-data-pipelines-with-delta-lake-120823.png)
+
+
+# FastAPI
+
+How to run the api
+
+```terminaloutput
+$  uv run uvicorn api:app --reload
+```
+
+## API Endpoints
+
+Data Quality Endpoint does a simple percentage check of how many records uploaded actually pass the validation check.
+
+```shell
+    curl http://127.0.0.1:8000/api/v1/quality
+```
+
+Example Response
+```json
+{
+    "success": true,
+    "message": "Success",
+    "data": [
+        {
+            "store_name": "BURUBURU",
+            "quality_percentage": 99.82
+        },
+        {
+            "store_name": "CHAKA RD",
+            "quality_percentage": 99.54
+        }
+    ]
+}
+```

@@ -3,3 +3,4 @@
 .env
 errors/*
 sales.db
+*.pyc

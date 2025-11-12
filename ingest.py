@@ -31,12 +31,19 @@ if errors:
     # you can get list of locations that have bad quality data from this list as well
     write_list_to_csv(errs, './errors/errors.csv')
 
+
+
+# Insert errors to db to do simple quality check endpoint
+insert_errs = [{**err["data"],"validation_passed": False } for err in errors]
+insert_sales = [{**r.model_dump(), "validation_passed": True} for r in sales]
+
+rows = [*insert_errs, *insert_sales]
 # Convert Pydantic models to dicts if needed
-if sales:
+if rows:
     try:
         if isinstance(sales[0], Sales):
-            records = [r.model_dump() for r in sales]
-            db.bulk_insert_mappings(Sale, records)
+            db.query(Sale).delete() # prevent duplication for demo
+            db.bulk_insert_mappings(Sale, rows)
             db.commit()
     except Exception as e:
         logger.error(f"Error inserting records: {e}")
