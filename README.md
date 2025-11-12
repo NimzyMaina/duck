@@ -1,7 +1,5 @@
 # Duck Ingestion
 
-## Project Setup
-
 ## System Requirements
 
 - You need python 3.9+
@@ -11,8 +9,6 @@
 
 Logfire is used for monitoring ingestion activity. 
 You can view logs from the "live" dashboard.
-
-
 
 This tool provides a centralized view the following from your pipelines and your APIs.
 - Logs
@@ -31,13 +27,14 @@ Signup here to get an **API TOKEN** - [Logfire Sign Up](https://pydantic.dev/log
 LOGFIRE_API_TOKEN=pylf_v1_eu_...
 ```
 
+# How to Run the Project
+
 ### Setup project
 
 Install dependencies from root directory
 ```terminal
 $ uv sync 
 ```
-
 
 ## Running Excel Ingestion Pipeline
 
@@ -56,4 +53,6 @@ In a production environment, you can log metrics to track a stores data accuracy
 I would go with the [**Medallion Architecture**](https://www.databricks.com/glossary/medallion-architecture) which allows data to flow through multiple layers, improving in **quality, structure,** and **usability** at each step.
 
 For example, I would imagine that data from QuickMark & Carrefour have different formats so at their individual formats, that would fall under **Bronze** layer. 
-The data can then be Augmented into a uniform schema at the **Silver** layer before finally "massaging" it into the **Gold** layer for business analytics. 
+The data can then be Augmented into a uniform schema at the **Silver** layer before finally "massaging" it into the **Gold** layer for business analytics.
+
+![Medallion Architecture](https://www.databricks.com/sites/default/files/inline-images/building-data-pipelines-with-delta-lake-120823.png)
